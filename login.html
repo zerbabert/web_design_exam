@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="rw">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login - Urubuga</title>
+  <style>
+    /* Simple responsive style */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#3b82f6;
+      --muted:#94a3b8;
+      --white:#ffffff;
+      --radius:12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(180deg,#071126 0%, #081226 100%);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      color:var(--white);
+      padding:20px;
+    }
+
+    .card{
+      width:100%;
+      max-width:420px;
+      background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    h1{
+      margin:0 0 8px;
+      font-size:20px;
+      letter-spacing:0.2px;
+    }
+    p.lead{
+      margin:0 0 20px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    label{display:block; font-size:13px; margin-bottom:6px; color:var(--muted)}
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid rgba(255,255,255,0.06);
+      background:transparent;
+      color:var(--white);
+      outline:none;
+      font-size:14px;
+      margin-bottom:14px;
+    }
+    .row {
+      display:flex;
+      gap:10px;
+      align-items:center;
+    }
+    .checkbox{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .btn{
+      width:100%;
+      padding:12px 14px;
+      background:linear-gradient(90deg,var(--accent), #2563eb);
+      color:white;
+      border:none;
+      border-radius:10px;
+      cursor:pointer;
+      font-weight:600;
+      font-size:15px;
+      margin-top:8px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .small{
+      margin-top:12px;
+      text-align:center;
+      font-size:13px;
+      color:var(--muted);
+    }
+    .small a{ color:var(--accent); text-decoration:none; font-weight:600 }
+
+    /* password show toggle */
+    .pw-wrap{
+      position:relative;
+    }
+    .toggle-eye{
+      position:absolute;
+      right:10px;
+      top:50%;
+      transform:translateY(-50%);
+      background:none;
+      border:none;
+      color:var(--muted);
+      cursor:pointer;
+      font-size:13px;
+      padding:6px;
+    }
+
+    /* validation message */
+    .error{
+      color:#ff7b7b;
+      font-size:13px;
+      margin-top:-8px;
+      margin-bottom:10px;
+    }
+
+    @media (max-width:420px){
+      .card{padding:18px}
+    }
+  </style>
+</head>
+<body>
+
+  <main class="card" role="main" aria-labelledby="loginTitle">
+    <h1 id="loginTitle">Injira muri konti yawe</h1>
+    <p class="lead">Injira ukoresheje email na password yawe.</p>
+
+    <form id="loginForm" novalidate>
+      <div>
+        <label for="email">Email</label>
+        <input id="email" class="input" name="email" type="email" placeholder="izina@example.com" required
+               autocomplete="username" />
+        <div id="emailError" class="error" aria-live="polite" style="display:none"></div>
+      </div>
+
+      <div>
+        <label for="password">Password</label>
+        <div class="pw-wrap">
+          <input id="password" class="input" name="password" type="password" placeholder="Andika password" required
+                 autocomplete="current-password" minlength="6" />
+          <button type="button" class="toggle-eye" id="togglePw" aria-label="Erekana password">erekana</button>
+        </div>
+        <div id="pwError" class="error" aria-live="polite" style="display:none"></div>
+      </div>
+
+      <div class="row" style="justify-content:space-between; margin-top:4px">
+        <label class="checkbox"><input type="checkbox" id="remember" name="remember"> Reka nibuke</label>
+        <a href="#" style="color:var(--muted); font-size:13px; text-decoration:none">Wibagiwe password?</a>
+      </div>
+
+      <button type="submit" class="btn">Injira</button>
+
+      <p class="small">Nta konti? <a href="#">Iyandikishe</a></p>
+    </form>
+  </main>
+
+  <script>
+    // Umutwe woroheje w'ukugaragaza validation no kohereza form client-side
+    (function(){
+      const form = document.getElementById('loginForm');
+      const email = document.getElementById('email');
+      const password = document.getElementById('password');
+      const emailError = document.getElementById('emailError');
+      const pwError = document.getElementById('pwError');
+      const toggle = document.getElementById('togglePw');
+
+      toggle.addEventListener('click', () => {
+        const t = password;
+        if (t.type === 'password') {
+          t.type = 'text';
+          toggle.textContent = 'hindura';
+          toggle.setAttribute('aria-label', 'Hindura ku buryo password iboneka');
+        } else {
+          t.type = 'password
