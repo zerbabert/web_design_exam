@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="rw">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Home - Urubuga</title>
+  <style>
+    /* --- COLORS AND BASICS --- */
+    :root{
+      --bg:#0f1724;
+      --card:#1e293b;
+      --accent:#3b82f6;
+      --muted:#94a3b8;
+      --white:#ffffff;
+    }
+
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:var(--bg);
+      color:var(--white);
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* --- NAVBAR --- */
+    header{
+      background:#111827;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:14px 24px;
+      box-shadow:0 2px 10px rgba(0,0,0,0.5);
+    }
+    .logo{
+      font-weight:700;
+      font-size:20px;
+      color:var(--accent);
+      text-decoration:none;
+    }
+    nav a{
+      color:var(--muted);
+      margin-left:20px;
+      text-decoration:none;
+      font-size:14px;
+      transition:color .2s;
+    }
+    nav a:hover{
+      color:var(--white);
+    }
+    .btn-logout{
+      background:var(--accent);
+      color:white;
+      padding:8px 14px;
+      border:none;
+      border-radius:6px;
+      cursor:pointer;
+      font-size:14px;
+    }
+
+    /* --- MAIN SECTION --- */
+    main{
+      flex:1;
+      padding:40px 20px;
+      max-width:1000px;
+      margin:0 auto;
+    }
+    h1{
+      font-size:28px;
+      margin-bottom:10px;
+    }
+    p.lead{
+      color:var(--muted);
+      margin-bottom:30px;
+      font-size:15px;
+    }
+
+    /* --- CARDS --- */
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fill,minmax(250px,1fr));
+      gap:20px;
+    }
+    .card{
+      background:var(--card);
+      border-radius:12px;
+      padding:20px;
+      box-shadow:0 5px 15px rgba(0,0,0,0.3);
+      transition:transform .2s;
+    }
+    .card:hover{
+      transform:translateY(-4px);
+    }
+    .card h3{
+      margin-top:0;
+      font-size:18px;
+    }
+    .card p{
+      font-size:14px;
+      color:var(--muted);
+    }
+
+    footer{
+      background:#111827;
+      text-align:center;
+      color:var(--muted);
+      padding:12px;
+      font-size:13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header>
+    <a href="#" class="logo">Urubuga</a>
+    <nav>
+      <a href="home.html">Home</a>
+      <a href="#">Products</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <button class="btn-logout" id="logoutBtn">Logout</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main>
+    <h1>Murakaza neza, <span id="userName">User</span> 👋</h1>
+    <p class="lead">Iki ni urupapuro rwa mbere nyuma yo kwinjira (Home Page). Ushobora kubona amakuru y’ingenzi hano.</p>
+
+    <section class="grid">
+      <div class="card">
+        <h3>Ibicuruzwa bishya</h3>
+        <p>Reba ibicuruzwa bishya byongewe vuba aha muri system.</p>
+      </div>
+      <div class="card">
+        <h3>Raporo</h3>
+        <p>Kurikirana uko ibikorwa byagenze muri iki cyumweru.</p>
+      </div>
+      <div class="card">
+        <h3>Abakiriya</h3>
+        <p>Reba urutonde rw’abakiriya bashya n’abo waherukaga kuganira nabo.</p>
+      </div>
+      <div class="card">
+        <h3>Igenamigambi</h3>
+        <p>Andika cyangwa uhindure igenamigambi ryawe ry’umunsi.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 Urubuga | By <b>Emmanuel</b>
+  </footer>
+
+  <script>
+    // Iyi script ni iyerekana izina ry'umukoresha (demo)
+    const username = localStorage.getItem("userName") || "User";
+    document.getElementById("userName").textContent = username;
+
+    // Logout function
+    document.getElementById("logoutBtn").addEventListener("click", () => {
+      alert("Ugiye gusohoka...");
+      // gusiba data muri localStorage (demo)
+      localStorage.removeItem("userName");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
